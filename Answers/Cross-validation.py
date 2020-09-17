@@ -5,7 +5,11 @@ from sklearn import svm
 from sklearn.model_selection import cross_val_score
 from sklearn import metrics
 from sklearn.model_selection import ShuffleSplit
+from sklearn import preprocessing
+from sklearn.model_selection import KFold
 
+
+"""
 X, y = datasets.load_iris(return_X_y=True)
 
 
@@ -43,11 +47,32 @@ print(scores2)
 
 print("Accuracy: %0.2f (+/- %0.2f)" % (scores2.mean(), scores2.std() * 2))
 
-
-#
 n_samples = X.shape[0]
-
 print(n_samples)
+
+#scaling 
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.4, random_state=0)
+scaler = preprocessing.StandardScaler().fit(X_train)
+
+print (X_train)
+
+X_train_transformed = scaler.transform(X_train)
+
+print(X_train_transformed)
+
+clf = svm.SVC(C=1).fit(X_train_transformed, y_train)
+X_test_transformed = scaler.transform(X_test)
+score = clf.score(X_test_transformed, y_test)
+
+print(score)
+"""
+
+X = ["a", "b", "c", "d"]
+kf = KFold(n_splits=2)
+for train, test in kf.split(X):
+    print("%s %s" % (train, test))
+
 
 
 
