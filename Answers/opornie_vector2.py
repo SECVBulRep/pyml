@@ -8,11 +8,15 @@ newsgroups = datasets.fetch_20newsgroups(
              )
 
 
+y = newsgroups.target
+
 vectorizer = TfidfVectorizer()
 X = vectorizer.fit_transform(newsgroups.data)
-
 features_names = vectorizer.get_feature_names()
 
+
+print(vectorizer.vocabulary_)
+print(vectorizer.idf_)
 
 
 p=1
